@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .container h1 {
+            margin-bottom: 30px;
+        }
+        .container p {
+            margin-bottom: 40px;
+            font-size: 18px;
+            color: #333;
+        }
+        .container a {
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .container .btn {
+            padding: 15px 25px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        .container .btn-signup {
+            background-color: #007bff;
+        }
+        .container .btn-signup:hover {
+            background-color: #0056b3;
+        }
+        .container .btn-login {
+            background-color: #28a745;
+        }
+        .container .btn-login:hover {
+            background-color: #218838;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: inline-block;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'index' %}">Home</a>
+    </div>
+    <div class="container">
+        <h1>Welcome to Our Website</h1>
+        <p>Join us today and enjoy all the benefits of our platform.</p>
+        <a href="{% url 'signup' %}" class="btn btn-signup">Sign Up</a>
+        <a href="{% url 'login' %}" class="btn btn-login">Login</a>
+    </div>
+    
+    <div id="popup" class="popup"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const popup = document.getElementById('popup');
+            {% if messages %}
+                {% for message in messages %}
+                    popup.innerText = "{{ message }}";
+                    popup.style.display = 'block';
+                    setTimeout(() => {
+                        popup.style.display = 'none';
+                    }, 3000); // Hide after 3 seconds
+                {% endfor %}
+            {% endif %}
+        });
+    </script>
+</body>
+</html>
